@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.20" />
+    <PackageReference Include="Microsoft.IdentityModel.Logging" Version="6.20.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.20.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.20.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SWQT.512ViewModels\SWQT.512ViewModels.csproj" />
+    <ProjectReference Include="..\SWQT.640DataAccessAhk\SWQT.640DataAccessAhk.csproj" />
+    <ProjectReference Include="..\SWQT.768ConstantValue\SWQT.768ConstantValue.csproj" />
+  </ItemGroup>
+
+</Project>

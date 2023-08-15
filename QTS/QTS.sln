@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWQT.640DataAccessAhk", "SWQT.640DataAccessAhk\SWQT.640DataAccessAhk.csproj", "{433E0A29-C21C-416E-B804-CA0EC372F5C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWQT.512ViewModels", "SWQT.512ViewModels\SWQT.512ViewModels.csproj", "{9509484A-7C5A-4D47-9FF7-D4DC5DA6445A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWQT.768ConstantValue", "SWQT.768ConstantValue\SWQT.768ConstantValue.csproj", "{1C30A787-38E1-4ABB-A0CF-3B68A37779FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWQT.128WebApi", "SWQT.128WebApi\SWQT.128WebApi.csproj", "{059A509F-BE43-46C7-99D3-AAD6E155521F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QT.SuperWebApp", "QT.SuperWebApp\QT.SuperWebApp.csproj", "{20074D80-E30B-45BA-9A7D-D6251945C3FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWQT.320DataAccessSQLite", "SWQT.320DataAccessSQLite\SWQT.320DataAccessSQLite.csproj", "{A3A2A819-F1A1-4108-867D-DCAAA40846EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{433E0A29-C21C-416E-B804-CA0EC372F5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{433E0A29-C21C-416E-B804-CA0EC372F5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{433E0A29-C21C-416E-B804-CA0EC372F5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{433E0A29-C21C-416E-B804-CA0EC372F5C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9509484A-7C5A-4D47-9FF7-D4DC5DA6445A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9509484A-7C5A-4D47-9FF7-D4DC5DA6445A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9509484A-7C5A-4D47-9FF7-D4DC5DA6445A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9509484A-7C5A-4D47-9FF7-D4DC5DA6445A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C30A787-38E1-4ABB-A0CF-3B68A37779FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C30A787-38E1-4ABB-A0CF-3B68A37779FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C30A787-38E1-4ABB-A0CF-3B68A37779FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C30A787-38E1-4ABB-A0CF-3B68A37779FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{059A509F-BE43-46C7-99D3-AAD6E155521F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{059A509F-BE43-46C7-99D3-AAD6E155521F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{059A509F-BE43-46C7-99D3-AAD6E155521F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{059A509F-BE43-46C7-99D3-AAD6E155521F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20074D80-E30B-45BA-9A7D-D6251945C3FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20074D80-E30B-45BA-9A7D-D6251945C3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20074D80-E30B-45BA-9A7D-D6251945C3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20074D80-E30B-45BA-9A7D-D6251945C3FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3A2A819-F1A1-4108-867D-DCAAA40846EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3A2A819-F1A1-4108-867D-DCAAA40846EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3A2A819-F1A1-4108-867D-DCAAA40846EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3A2A819-F1A1-4108-867D-DCAAA40846EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97905DFC-8103-4C83-B66D-888F6C900524}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,155 @@
+﻿@using SWQT._512ViewModels.Admin.Login
+@model VMLoginRequest
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Đăng nhập hệ thống</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-primary">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+
+                                @{
+                                    string strLinkTemp = "";
+                                    {
+                                        string strTemp = nameof(QT.SuperWebApp.Controllers.LoginController);
+                                    string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
+                                        string strAction = nameof(QT.SuperWebApp.Controllers.LoginController.Index);
+                                    strLinkTemp = Url.Action(strAction, strController)!;
+                                    }
+                                }
+                                <div class="card-header">
+                                    <h3 class="text-center font-weight-light my-4">
+                                        <a href="@strLinkTemp" class="link-dark text-decoration-none" style='cursor: default;'>Đăng nhập</a>
+                                    </h3>
+                                </div>
+
+                                <div class="card-body">
+
+                                    @{
+                                        var lstTupleController1Action2 = new List<Tuple<string, string>>();
+                                        {
+                                            string strTemp = nameof(QT.SuperWebApp.Controllers.LoginController);
+                                            string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
+                                            string strAction = nameof(QT.SuperWebApp.Controllers.LoginController.Index);
+                                            lstTupleController1Action2.Add(new Tuple<string, string>(strController, strAction));
+                                        }
+                                        //{
+                                        //    string strTemp = nameof(DNQT.AdminApp.Controllers.UserController);
+                                        //    string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
+                                        //    string strAction = nameof(DNQT.AdminApp.Controllers.UserController.IARRegister);
+                                        //    lstTupleController1Action2.Add(new Tuple<string, string>(strController, strAction));
+                                        //}
+                                    }
+                                    <form asp-controller="@lstTupleController1Action2[0].Item1"
+                                          asp-action="@lstTupleController1Action2[0].Item2" method="post">
+
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" asp-for="@Model.StrUserName" type="text" placeholder="Nhập tên đăng nhập" value="" />
+                                            <label>Tên đăng nhập</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" asp-for="@Model.StrPassword" type="password" placeholder="Password" value="" />
+                                            <label>Mật khẩu</label>
+                                        </div>
+                                        <div class="form-check mb-3 collapse">
+                                            <input class="form-check-input" asp-for="@Model.BlnRememberMe" type="checkbox" value="" />
+                                            <label class="form-check-label">Nhớ mật khẩu</label>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
+                                            @*<a class="small collapse" asp-controller="@lstTupleController1Action2[1].Item1" 
+                                               asp-action="@lstTupleController1Action2[1].Item2">Đăng ký</a>*@
+                                            <button class="btn btn-primary" type="submit">Đồng ý</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-footer text-center py-3">
+                                    <div class="small">...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div id="layoutAuthentication_footer">
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; SWQT</div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+          @*  <div class="modal fade show" data-bs-backdrop="static"
+              data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLiveLabel"
+              style='display: block;' aria-modal="true" role="dialog">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+
+                        <div class="modal-header d-flex justify-content-center py-2">
+                          <h5 class="modal-title fw-bold text-primary">
+                            strHeader
+                          </h5>
+                        </div>
+
+                        <div class="modal-body  d-flex justify-content-center">
+                          <div>
+                            <div class="d-flex justify-content-center">
+                              <div class="spinner-border text-primary" style='width:64px; height:64px;' role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                            <p class="d-flex justify-content-center text-primary my-1">
+                              Đang xử lý...
+                            </p>
+                            <p class="d-flex justify-content-center text-primary my-1">
+                              strPercent
+                            </p>
+
+                      <p class="d-flex justify-content-center text-primary my-1">
+                        strMessage
+                      </p>
+
+                          </div>
+                        </div>
+
+
+
+                </div>
+              </div>
+            </div>*@
+
+           @*<div class="modal-backdrop fade show"></div> *@
+            @*<div class="modal-backdrop bg-secondary"></div>*@
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="/js/scripts.js"></script>
+    
+    <script src="/js/jquery3.4.1/jquery.min.js"></script>
+    
+</body>
+</html>

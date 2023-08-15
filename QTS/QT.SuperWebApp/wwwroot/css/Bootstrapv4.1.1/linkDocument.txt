@@ -1,0 +1,10 @@
+﻿
+link:
+https://getbootstrap.com/docs/4.1/getting-started/introduction/
+
+
+@section ScriptsCSS{
+
+<link href="/css/Bootstrapv4.1.1/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+}

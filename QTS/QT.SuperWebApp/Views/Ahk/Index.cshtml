@@ -1,0 +1,152 @@
+﻿@model List<SWQT._640DataAccessAhk.Models.MOneAhk>
+
+@{
+    ViewData["Title"] = "Danh sách authotkey";
+    Layout = "~/Views/Shared/_LayoutBootstrapv5.cshtml";
+    
+    Func<int, Microsoft.AspNetCore.Html.IHtmlContent> htmlTrHeaderFooter =
+        @<tr class="text-center align-middle">
+            <th>STT</th>
+            <th>AHK</th>
+            <th>Số đoạn</th>
+        </tr>;
+}
+
+@section ScriptsCSS{
+
+    <style type='text/css'>
+        .table tbody tr.highlight td {
+            background-color: #bce2e5;
+        }
+    </style>
+
+    <style type="text/css">
+
+        #infoTable th {
+            vertical-align: middle;
+        }
+
+        #infoTable thead th {
+            border-bottom: 2px solid black;
+        }
+
+        #infoTable td {
+            vertical-align: middle;
+        }
+
+    </style>
+
+
+}
+
+
+
+@section ScriptsJavaScript{
+
+    <script type='text/javascript'>
+        $('#infoTable').on('click', 'tbody tr', function (event) {
+            $(this).addClass('highlight').siblings().removeClass('highlight');
+        });
+
+    </script>
+}
+
+<div class="container-fluid">
+    <div class="row px-1">
+
+        <div class="col">
+        </div>
+
+        <div class="card my-1 px-0 col-sm-10 col-md-7 col-lg-6 col-xl-5 col-xxl-4">
+
+            <ol class="breadcrumb my-1 mx-2">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+
+                @{
+                    string strBreadcrumbCurrent = $"Danh sách autohotkey";
+                }
+                <li class="breadcrumb-item active">@strBreadcrumbCurrent</li>
+
+            </ol>
+
+        </div>
+
+        <div class="col">
+        </div>
+
+    </div>
+    <div class="row px-1">
+
+        <div class="col">
+        </div>
+
+        <div class="card my-1 px-0 col-sm-10 col-md-7 col-lg-6 col-xl-5 col-xxl-4">
+
+            @*<div class="card-header">
+                <a class="btn btn-primary btn-sm" href="#idAAddNew" id="idAAddNew">Thêm đơn hàng</a>
+            </div>*@
+
+            <div class="card-body p-1">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm table-striped mb-0" id="infoTable">
+
+                        <thead>
+                            @htmlTrHeaderFooter( 0)
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (SWQT._640DataAccessAhk.Models.MOneAhk item in @Model)
+                            {
+
+                                string strId = "" + item.IntId;
+                                string strActionName = nameof(QT.SuperWebApp.Controllers.AhkController.Detail);
+                                string strLink = Url.Action(strActionName, new { intId = strId })!;
+                                string strHtmlAddToLink = $"href='{strLink}' class='d-flex align-items-center text-decoration-none'";
+
+                                int intSoDoan = item.LstMultiText.Count;
+                                if (intSoDoan==0)
+                                {
+                                    intSoDoan = 1;
+                                }
+
+                                <tr class="text-center align-middle">
+                                    <td>@strId</td>
+                                    <td>
+                                        <div class="d-flex justify-content-between">
+                                            <div>@item.StrTitle</div>
+                                            <div></div>
+                                            <div class="d-flex justify-content-center">
+                                                <a @Html.Raw(strHtmlAddToLink)>
+
+                                                    @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject.CVPartialView.PartialView._PVListIconSvg.PATH
+                                                , new string[] {QT.SuperWebApp.ConstantValueProject.CVIconName.IconEdit.STR})
+
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>@intSoDoan</td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+
+                        <tfoot>
+                            @htmlTrHeaderFooter(0)
+                        </tfoot>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col">
+        </div>
+
+    </div>
+
+</div>

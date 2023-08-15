@@ -1,0 +1,407 @@
+﻿
+@{
+    ViewData["Title"] = "Thống kê theo số đơn hàng";
+    Layout = "~/Views/Shared/_LayoutBootstrapv5.cshtml";
+    
+    Func<int, Microsoft.AspNetCore.Html.IHtmlContent> htmlTrHeaderFooter =
+        @<tr class="text-center align-middle">
+            <th>STT</th>
+            <th>AHK</th>
+            <th>Số đoạn</th>
+        </tr>;
+
+    Func<string, Microsoft.AspNetCore.Html.IHtmlContent> htmlH6HeaderGroupbox =
+        @<h6 class="bg-white px-1 divGroupboxMarginLeft">
+            @item
+        </h6>;
+
+    Func<string, Microsoft.AspNetCore.Html.IHtmlContent> htmlDivHeaderGroupbox =
+        @<div class="position-absolute top-0 start-0  translate-middle-y d-flex justify-content-start">
+            @htmlH6HeaderGroupbox(item)
+        </div>;
+            
+    Func<string[], Microsoft.AspNetCore.Html.IHtmlContent> htmlDivDatepicker =
+        @<div class="card my-3 mx-1 px-0 position-relative  ">
+
+            @htmlDivHeaderGroupbox(item[0])
+
+            <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+
+                <input id="@item[1]" type="text" class="classInputDatepicker input-sm form-control mt-1 border-0" name="start">
+
+            </div>
+
+        </div>;
+
+    Func<string, Microsoft.AspNetCore.Html.IHtmlContent> htmlDiv2Datepicker =
+        @<div class="classDiv2Datepicker d-flex justify-content-around my-1">
+
+            @htmlDivDatepicker(new string[] {"Từ 00h00 ngày","idInput"+item+"StartDate"} )
+            @htmlDivDatepicker(new string[] {"Đến 23h59 ngày","idInput"+item+"EndDate"} )
+
+        </div>;
+
+}
+
+@section ScriptsCSS{
+    
+<link rel="stylesheet" href="/css/bootstrapDatepicker1.9.0/bootstrap-datepicker.min.css">
+
+    <style type='text/css'>
+
+        #infoTable {
+            table-layout: fixed;
+        }
+
+        .classInputDatepicker {
+            text-align: center; 
+        }
+        
+        .classMl0MrTru5 {
+            margin-left: 0px;
+            margin-right: -5px;
+        }
+        
+        .classMl0Mr0 {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        
+        .classMlTru5MrTru5 {
+            margin-left: -5px;
+            margin-right: -5px;
+        }
+        
+        .preMaxHeight200 {
+            min-height: 60px;
+            max-height: 200px;
+            font-size: 10px;
+            line-height: 0.9;
+        }
+
+        .classABtnShow{
+            width:77px;
+        }
+        
+        .classABtnHide{
+            width:77px;
+        }
+
+        .divGroupboxMarginLeft {
+            margin-left: 6px;
+        }
+
+        .divGroupboxMarginTop {
+            margin-top: 5px;
+        }
+
+        .textAreaNoBorder {
+            border: none;
+            overflow: auto;
+            outline: none;
+            font-size: 14px;
+            line-height: 1;
+            max-height: 600px;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            resize: none; /*remove the resize handle on the bottom right*/
+        }
+
+    </style>
+
+}
+
+@section ScriptsJavaScript{
+    
+<script src="/js/bootstrapDatepicker1.9.0/bootstrap-datepicker.min.js"></script>
+<script src="/js/bootstrapDatepicker1.9.0/bootstrap-datepicker.vi.min.js"></script>
+
+<script src="/js/Chart.jsv4.0.1/chart.js"></script>
+
+<script src="/js/scriptsFunctionCommon.js"></script>
+
+<script src="/js/Statistic/jsOfByQuantity.js"></script>
+
+}
+
+<div class="container-fluid">
+
+    <div class="row px-1 d-flex justify-content-center">
+
+        <div class="card my-1 px-0 col-sm-10 col-md-7 col-lg-6 col-xl-5 col-xxl-4">
+
+            <ol class="breadcrumb my-1 mx-2">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+
+                @{
+                    string strBreadcrumbCurrent = $"Thống kê theo số đơn hàng";
+                }
+                <li class="breadcrumb-item active">@strBreadcrumbCurrent</li>
+
+            </ol>
+
+        </div>
+
+    </div>
+
+    <div class="row px-1 d-flex justify-content-center">
+
+        <div class="card my-3 px-0 position-relative         col-sm-10 col-md-7 col-lg-6 col-xl-5 col-xxl-4">
+
+            @htmlDivHeaderGroupbox("Chọn khoảng thời gian thống kê")
+
+            <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+
+                <div class="my-1 mx-1">
+                    <div class="form-check">
+                        <input class="classInputRadioTime form-check-input" type="radio" name="strNameGroupRadio"
+                               id="strIdRadio" title="6">
+                        <label class="form-check-label" for="strIdRadio">
+                            Từ ngày có đơn hàng gần nhất (đến 6 tháng trước)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="classInputRadioTime form-check-input" type="radio" name="strNameGroupRadio"
+                               id="strIdRadio2" title="12">
+                        <label class="form-check-label" for="strIdRadio2">
+                            Từ ngày có đơn hàng gần nhất (đến 12 tháng trước)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="classInputRadioTime form-check-input" type="radio" name="strNameGroupRadio"
+                               id="strIdRadio3" title="Today" disabled>
+                        <label class="form-check-label" for="strIdRadio3">
+                            Tự chọn
+                        </label>
+                    </div>
+                </div>
+
+
+
+                @htmlDiv2Datepicker("")
+
+                <div class="d-flex justify-content-around my-1">
+
+                    <a class="btn btn-primary btn-sm" href="#" id="idAStartStatistic"
+                       title="@ViewBag.vbstrUrlForAStartStatistic">Xác nhận</a>
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="classDivAllChart row collapse">
+
+
+        <div class="col-md-6 col-xl-4 col-xxl-3">
+
+            <div class="card my-1 position-relative border border-danger">
+
+                <div class="collapse show">
+
+                    <div class="mt-3 d-flex justify-content-start px-2">
+                        <pre class="my-auto" style="white-space: pre-wrap;">A1:Cả ngày   B2:Từ 12h đến 24h00   C3:Từ 00h đến 11h59</pre>
+                    </div>
+
+                    <div class="card-body p-0 classMl0MrTru5">
+                        <div style="min-height: 300px;">
+                            <canvas id="idCanvasLineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <h6 class="text-center">
+                        Tổng số lượng đơn hàng theo ngày<br>(Từ đầu tuần trước đến thời gian đã chọn)
+                    </h6>
+                </div>
+
+
+
+                <div class="classDivMocThoiGian card my-3 mx-1 position-relative" style="max-width: 450px;">
+
+                    @htmlDivHeaderGroupbox("Mốc thời gian cụ thể")
+
+                    <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+                        @htmlDiv2Datepicker("1")
+
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-center px-2">
+                        <a href="#" class="link-info" id="idAShowLineChart"
+                           title="@ViewBag.vbstrUrlForAShowLineChart">Hiển thị</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6 col-xl-4 col-xxl-3">
+
+            <div class="card my-1 position-relative border border-success">
+
+                <div class="collapse show">
+
+                    <div class="mt-3 d-flex justify-content-start px-2">
+                        <pre class="my-auto" style="white-space: pre-wrap;">A1:Cả ngày   B2:Từ 12h đến 24h00   C3:Từ 00h đến 11h59</pre>
+                    </div>
+
+                    <div class="card-body p-0 classMl0Mr0">
+                        <div style="min-height: 300px;">
+                            <canvas id="idCanvasBarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <h6 class="text-center">
+                        Tổng số lượng đơn hàng theo tháng<br>(Trong 6 tháng gần nhất)
+                    </h6>
+                </div>
+
+
+
+                <div class="classDivMocThoiGian card my-3 mx-1 position-relative" style="max-width: 450px;">
+
+                    @htmlDivHeaderGroupbox("Mốc thời gian cụ thể")
+
+                    <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+                        @htmlDiv2Datepicker("2")
+
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-center px-2">
+                        <a href="#" class="link-info" id="idAShowBarChart"
+                           title="@ViewBag.vbstrUrlForAShowBarChart">Hiển thị</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6 col-xl-4 col-xxl-3">
+
+            <div class="card my-1 position-relative border border-info">
+
+                <div class="collapse show">
+
+                    <div class="d-flex justify-content-center flex-wrap" id="idDivNoteColor">
+                    </div>
+
+                    <div class="card-body p-0 classMlTru5MrTru5">
+                        <div class="d-flex justify-content-center" style="max-height: 400px;">
+                            <canvas id="idCanvasMultiPieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <h6 class="text-center">
+                        Số đơn hàng theo khách hàng<br>(Trong 6 tháng gần nhất)
+                    </h6>
+                </div>
+
+
+
+                <div class="classDivMocThoiGian card my-3 mx-1 position-relative" style="max-width: 450px;">
+
+                    @htmlDivHeaderGroupbox("Mốc thời gian cụ thể")
+
+                    <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+                        @htmlDiv2Datepicker("3")
+
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-center px-2">
+                        <a href="#" class="link-info" id="idAShowMultiPieChart"
+                           title="@ViewBag.vbstrUrlForAShowMultiPieChart">Hiển thị</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6 col-xl-4 col-xxl-3">
+
+            <div class="card my-1 position-relative border border-success">
+
+                <div class="collapse show">
+
+                    <div class="d-flex justify-content-center flex-wrap" id="idDiv2NoteColor">
+                    </div>
+
+                    <div class="card-body p-0 classMlTru5MrTru5">
+                        <div class="d-flex justify-content-center" style="max-height: 400px;">
+                            <canvas id="idCanvasPolarAreaChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <h6 class="text-center">
+                        Số đơn hàng theo khách hàng<br>(Trong 6 tháng gần nhất)
+                    </h6>
+                </div>
+
+
+
+                <div class="classDivMocThoiGian card my-3 mx-1 position-relative" style="max-width: 450px;">
+
+                    @htmlDivHeaderGroupbox("Mốc thời gian cụ thể")
+
+                    <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+                        @htmlDiv2Datepicker("4")
+
+                    </div>
+
+                    <div class="mb-2 d-flex justify-content-center px-2">
+                        <a href="#" class="link-info" id="idAShowPolarAreaChart"
+                           title="@ViewBag.vbstrUrlForAShowPolarAreaChart">Hiển thị</a>
+                    </div>
+
+                </div>
+
+                <div id="idDivSortMaxToMin" title="@ViewBag.vbstrUrlForDivSortMaxToMin" class="mx-1"></div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <div class="card my-1 border-0">
+
+        @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject.CVPartialView.PartialView._LoadingPopup.PATH
+        , new string[] {""})
+
+    </div>
+
+
+
+
+
+</div>

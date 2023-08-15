@@ -1,0 +1,64 @@
+﻿@model String[]
+@{
+    var strName = QT.SuperWebApp.ConstantValueProject.CVPartialView.PartialView._LoadingPopup.STR;
+    if (strName == "")
+    {
+    }
+}
+
+<div class="card-body p-1">
+    <div class="modal fade" id="idDivStaticBackdropLivePopup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-center py-2">
+                    <h5 class="modal-title fw-bold text-primary" id="idStrTitle">
+                        TÊN THAO TÁC
+                    </h5>
+
+                </div>
+
+                <div class=" collapse show" id="idDivSpinnerPercent">
+                    <div class="modal-body  d-flex justify-content-center">
+                        <div>
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+
+                            <p class="d-flex justify-content-center text-primary my-1">
+                                Đang xử lý...
+                            </p>
+                            <p class="d-flex justify-content-center text-primary my-1"
+                               id="idStrPercent">
+                                50%
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" collapse show" id="idDivMessage">
+                    <div class="modal-body  d-flex justify-content-center">
+                        <p class="d-flex justify-content-center text-primary my-1">
+                            Message!
+                        </p>
+                    </div>
+                </div>
+
+                <div class=" collapse show" id="idDivBtnLoading">
+                    <div class="modal-footer d-flex justify-content-center py-1 collapse show">
+
+                        @*<button type="button" class="btn btn-primary btn-sm"
+                        id="idButtonAccept">Xác nhận</button>*@
+
+                        <button type="button" class="btn btn-secondary btn-sm collapse show"
+                                data-bs-dismiss="modal" id="idButtonClose">
+                            Đóng
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
