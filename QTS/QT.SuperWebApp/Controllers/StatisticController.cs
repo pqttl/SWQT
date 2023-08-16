@@ -20,9 +20,10 @@ namespace QT.SuperWebApp.Controllers
         {
             string strTemp = nameof(StatisticController);
             string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
-            return RedirectToAction(nameof(StatisticController.ByQuantity), strController);
+            return RedirectToAction(nameof(StatisticController.ByQuantityOrder), strController);
             //return View(nameof(ByQuantity));
         }
+
         public IActionResult ByQuantity()
         {
             ViewBag.vbstrUrlForAStartStatistic = Url.Action(nameof(JsonResultGetDataForStatisticByTime));
@@ -39,6 +40,114 @@ namespace QT.SuperWebApp.Controllers
             ViewBag.vbstrUrlForDivSortMaxToMin = strUrl;
             return View();
         }
+
+        #region ByQuantityOrder
+
+        public IActionResult ByQuantityOrder()
+        {
+            //ViewBag.vbstrUrlForAStartStatistic = Url.Action(nameof(JsonResultGetDataForStatisticByTime));
+
+            //ViewBag.vbstrUrlForAShowLineChart = Url.Action(nameof(JsonResultShowChartQuantity2Week));
+            //ViewBag.vbstrUrlForAShowBarChart = Url.Action(nameof(JsonResultShowChartQuantity6Month));
+            //ViewBag.vbstrUrlForAShowMultiPieChart = Url.Action(nameof(JsonResultShowChartQuantityByCustomer));
+            //ViewBag.vbstrUrlForAShowPolarAreaChart = Url.Action(nameof(JsonResultShowChartMaxQuantityByCustomer));
+
+            string strTemp = nameof(QT.SuperWebApp.Controllers.StatisticController);
+            string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
+            string strAction = nameof(QT.SuperWebApp.Controllers.StatisticController.PVChooseTime);
+            string strUrl = Url.Action(strAction, strController) + "?arrayStrInput=1311";
+            ViewBag.vbstrUrlForDivChooseTime = strUrl;
+            return View();
+        }
+
+        public IActionResult PVChooseTime(string[] arrayStrInput)
+        {
+            string strNameFunction = nameof(PVChooseTime);
+            try
+            {
+                {
+                    string strTemp = nameof(QT.SuperWebApp.Controllers.StatisticController);
+                    string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
+                    string strAction = nameof(QT.SuperWebApp.Controllers.StatisticController.PVManyChart);
+                    string strUrl = Url.Action(strAction, strController) + "?arrayStrInput=1311";
+                    ViewBag.vbstrUrlForShow_PVManyChart = strUrl;
+                }
+
+                ViewBag.vbstrUrlForAStartStatistic = Url.Action(nameof(JsonResultGetDataForStatisticByTime));
+
+                string strPath = "";
+                strPath += ""+nameof(ByQuantityOrder);
+                strPath += "/"+ strNameFunction;
+                return PartialView(strPath);
+            }
+            catch (Exception et)
+            {
+                string str = et.Message;
+                return Content($"<div>{str}</div>");
+            }
+        }
+        
+        public IActionResult PVManyChart(string[] arrayStrInput)
+        {
+            string strNameFunction = nameof(PVManyChart);
+            try
+            {
+                {
+                    string strTemp = nameof(QT.SuperWebApp.Controllers.StatisticController);
+                    string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
+                    string strAction = nameof(QT.SuperWebApp.Controllers.StatisticController.PVOneChart);
+                    string strUrl = Url.Action(strAction, strController) + "?arrayStrInput=";
+                    ViewBag.vbstrUrlForShow_PVOneChart_Line = strUrl+"Line";
+                    ViewBag.vbstrUrlForShow_PVOneChart_Bar = strUrl+ "Bar";
+                    ViewBag.vbstrUrlForShow_PVOneChart_MultiPie = strUrl+ "MultiPie";
+                    ViewBag.vbstrUrlForShow_PVOneChart_PolarArea = strUrl+ "PolarArea";
+                }
+
+                ViewBag.vbstrUrlForAShowLineChart = Url.Action(nameof(JsonResultShowChartQuantity2Week));
+                ViewBag.vbstrUrlForAShowBarChart = Url.Action(nameof(JsonResultShowChartQuantity6Month));
+                ViewBag.vbstrUrlForAShowMultiPieChart = Url.Action(nameof(JsonResultShowChartQuantityByCustomer));
+                ViewBag.vbstrUrlForAShowPolarAreaChart = Url.Action(nameof(JsonResultShowChartMaxQuantityByCustomer));
+
+                {
+                    string strTemp = nameof(QT.SuperWebApp.Controllers.BaseController);
+                    string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
+                    string strAction = nameof(QT.SuperWebApp.Controllers.BaseController.PartialViewSortMaxToMin);
+                    string strUrl = Url.Action(strAction, strController) + "?arrayStrInput=1311";
+                    ViewBag.vbstrUrlForDivSortMaxToMin = strUrl;
+                }
+
+                string strPath = "";
+                strPath += ""+nameof(ByQuantityOrder);
+                strPath += "/"+ strNameFunction;
+                return PartialView(strPath);
+            }
+            catch (Exception et)
+            {
+                string str = et.Message;
+                return Content($"<div>{str}</div>");
+            }
+        }
+        
+        public IActionResult PVOneChart(string[] arrayStrInput)
+        {
+            string strNameFunction = nameof(PVOneChart);
+            try
+            {
+                ViewBag.vbstrNameChart = arrayStrInput[0];
+
+                string strPath = "";
+                strPath += ""+nameof(ByQuantityOrder);
+                strPath += "/"+ strNameFunction;
+                return PartialView(strPath);
+            }
+            catch (Exception et)
+            {
+                string str = et.Message;
+                return Content($"<div>{str}</div>");
+            }
+        }
+
+        #endregion
 
         #region JsonResult ajax
 

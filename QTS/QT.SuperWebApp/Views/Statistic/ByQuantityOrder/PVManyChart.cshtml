@@ -1,0 +1,172 @@
+﻿@{
+    var strName = nameof(QT.SuperWebApp.Controllers.StatisticController.PVManyChart);
+    if (strName == "")
+    {
+    }
+
+}
+
+<div class="classDivAllChart row collapse show">
+
+
+    <div class="col-md-6 col-xl-4 col-xxl-3">
+
+        <div class="card my-1 position-relative border border-danger">
+
+            <div class="d-flex justify-content-center">
+                <h6 class="text-center">
+                    Tổng số lượng đơn hàng theo ngày<br>(Từ đầu tuần trước đến thời gian đã chọn)
+                </h6>
+            </div>
+
+
+
+            <div class="classDivMocThoiGian card my-3 mx-1 position-relative" style="max-width: 450px;">
+
+                @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+                .CVPartialView.PartialView._PVManyFuncHtml.PATH
+                , new string[] {"htmlDivHeaderGroupbox","Mốc thời gian cụ thể"})
+
+                <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+
+                    @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+                    .CVPartialView.PartialView._PVManyFuncHtml.PATH
+                    , new string[] {"htmlDiv2Datepicker","1"})
+
+                </div>
+
+                <div class="mb-2 d-flex justify-content-center px-2">
+                    <a href="#" class="link-info" id="idAShowLineChart"
+                       strUrlPVToShow="@ViewBag.vbstrUrlForShow_PVOneChart_Line"
+                       strInput="@ViewBag.vbstrUrlForAShowLineChart">Hiển thị</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-6 col-xl-4 col-xxl-3">
+
+        <div class="card my-1 position-relative border border-success">
+
+            <div class="d-flex justify-content-center">
+                <h6 class="text-center">
+                    Tổng số lượng đơn hàng theo tháng<br>(Trong 6 tháng gần nhất)
+                </h6>
+            </div>
+
+
+
+            <div class="classDivMocThoiGian card my-3 mx-1 position-relative" style="max-width: 450px;">
+
+                @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+                .CVPartialView.PartialView._PVManyFuncHtml.PATH
+                , new string[] {"htmlDivHeaderGroupbox","Mốc thời gian cụ thể"})
+
+                <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+
+                    @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+                    .CVPartialView.PartialView._PVManyFuncHtml.PATH
+                    , new string[] {"htmlDiv2Datepicker","2"})
+
+                </div>
+
+                <div class="mb-2 d-flex justify-content-center px-2">
+                    <a href="#" class="link-info" id="idAShowBarChart"
+                       strUrlPVToShow="@ViewBag.vbstrUrlForShow_PVOneChart_Bar"
+                       strInput="@ViewBag.vbstrUrlForAShowBarChart">Hiển thị</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-6 col-xl-4 col-xxl-3">
+
+        <div class="card my-1 position-relative border border-info">
+
+            <div class="d-flex justify-content-center">
+                <h6 class="text-center">
+                    Số đơn hàng theo khách hàng<br>(Trong 6 tháng gần nhất)
+                </h6>
+            </div>
+
+
+
+            <div class="classDivMocThoiGian card my-3 mx-1 position-relative" style="max-width: 450px;">
+
+                @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+                .CVPartialView.PartialView._PVManyFuncHtml.PATH
+                , new string[] {"htmlDivHeaderGroupbox","Mốc thời gian cụ thể"})
+
+                <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+
+                    @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+                    .CVPartialView.PartialView._PVManyFuncHtml.PATH
+                    , new string[] {"htmlDiv2Datepicker","3"})
+
+                </div>
+
+                <div class="mb-2 d-flex justify-content-center px-2">
+                    <a href="#" class="link-info" id="idAShowMultiPieChart"
+                       strUrlPVToShow="@ViewBag.vbstrUrlForShow_PVOneChart_MultiPie"
+                       strInput="@ViewBag.vbstrUrlForAShowMultiPieChart">Hiển thị</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-6 col-xl-4 col-xxl-3">
+
+        <div class="card my-1 position-relative border border-success">
+
+            <div class="d-flex justify-content-center">
+                <h6 class="text-center">
+                    Số đơn hàng theo khách hàng<br>(Trong 6 tháng gần nhất)
+                </h6>
+            </div>
+
+
+
+            <div class="classDivMocThoiGian card my-3 mx-1 position-relative" style="max-width: 450px;">
+
+                @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+                .CVPartialView.PartialView._PVManyFuncHtml.PATH
+                , new string[] {"htmlDivHeaderGroupbox","Mốc thời gian cụ thể"})
+
+                <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+
+                    @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+                    .CVPartialView.PartialView._PVManyFuncHtml.PATH
+                    , new string[] {"htmlDiv2Datepicker","4"})
+
+                </div>
+
+                <div class="mb-2 d-flex justify-content-center px-2">
+                    <a href="#" class="link-info" id="idAShowPolarAreaChart"
+                       strUrlPVToShow="@ViewBag.vbstrUrlForShow_PVOneChart_PolarArea"
+                       strInput="@ViewBag.vbstrUrlForAShowPolarAreaChart">Hiển thị</a>
+                </div>
+
+            </div>
+
+            <div id="idDivSortMaxToMin" title="@ViewBag.vbstrUrlForDivSortMaxToMin" class="mx-1"></div>
+
+        </div>
+
+    </div>
+
+
+</div>

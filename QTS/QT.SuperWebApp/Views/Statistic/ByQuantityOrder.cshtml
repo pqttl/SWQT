@@ -1,0 +1,110 @@
+﻿@{
+
+    ViewData["Title"] = "Thống kê theo số đơn hàng";
+    Layout = "~/Views/Shared/_LayoutBootstrapv5.cshtml";
+
+}
+
+@section ScriptsCSS{
+
+    <link rel="stylesheet" href="/css/bootstrapDatepicker1.9.0/bootstrap-datepicker.min.css">
+
+    <style type='text/css'>
+
+        #infoTable {
+            table-layout: fixed;
+        }
+
+        .classInputDatepicker {
+            text-align: center;
+        }
+
+        .classMl0MrTru5 {
+            margin-left: 0px;
+            margin-right: -5px;
+        }
+
+        .classMl0Mr0 {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .classMlTru5MrTru5 {
+            margin-left: -5px;
+            margin-right: -5px;
+        }
+
+        .preMaxHeight200 {
+            min-height: 60px;
+            max-height: 200px;
+            font-size: 10px;
+            line-height: 0.9;
+        }
+
+        .classABtnShow {
+            width: 77px;
+        }
+
+        .classABtnHide {
+            width: 77px;
+        }
+
+        .divGroupboxMarginLeft {
+            margin-left: 6px;
+        }
+
+        .divGroupboxMarginTop {
+            margin-top: 5px;
+        }
+
+        .textAreaNoBorder {
+            border: none;
+            overflow: auto;
+            outline: none;
+            font-size: 14px;
+            line-height: 1;
+            max-height: 600px;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            resize: none; /*remove the resize handle on the bottom right*/
+        }
+
+    </style>
+
+}
+
+@section ScriptsJavaScript{
+
+    <script src="/js/bootstrapDatepicker1.9.0/bootstrap-datepicker.min.js"></script>
+    <script src="/js/bootstrapDatepicker1.9.0/bootstrap-datepicker.vi.min.js"></script>
+
+    <script src="/js/Chart.jsv4.0.1/chart.js"></script>
+
+    <script src="/js/scriptsFunctionCommon.js"></script>
+
+    <script src="/js/Statistic/jsOfByQuantityOrder.js"></script>
+
+}
+
+<div class="container-fluid">
+
+    <div class="row px-1 d-flex justify-content-center">
+
+        <div class="card my-1 px-0 col-sm-10 col-md-7 col-lg-6 col-xl-5 col-xxl-4">
+
+            <ol class="breadcrumb my-1 mx-2">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+
+                @{
+                    string strBreadcrumbCurrent = $"Thống kê theo số đơn hàng";
+                }
+                <li class="breadcrumb-item active" strInput="@ViewBag.vbstrUrlForDivChooseTime">@strBreadcrumbCurrent</li>
+
+            </ol>
+
+        </div>
+
+    </div>
+
+</div>

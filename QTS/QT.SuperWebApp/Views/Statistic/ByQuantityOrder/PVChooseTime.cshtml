@@ -1,0 +1,67 @@
+﻿@{ 
+    var strName = nameof(QT.SuperWebApp.Controllers.StatisticController.PVChooseTime);
+    if (strName == "")
+    {
+    }
+
+}
+
+<div class="row px-1 d-flex justify-content-center">
+
+    <div class="card my-3 px-0 position-relative         col-sm-10 col-md-7 col-lg-6 col-xl-5 col-xxl-4">
+
+        @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+        .CVPartialView.PartialView._PVManyFuncHtml.PATH
+        , new string[] {"htmlDivHeaderGroupbox","Chọn khoảng thời gian thống kê"})
+
+        <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+
+            <div class="my-1 mx-1">
+                <div class="form-check">
+                    <input class="classInputRadioTime form-check-input" type="radio" name="strNameGroupRadio"
+                           id="strIdRadio" title="6">
+                    <label class="form-check-label" for="strIdRadio">
+                        Từ ngày có đơn hàng gần nhất (đến 6 tháng trước)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="classInputRadioTime form-check-input" type="radio" name="strNameGroupRadio"
+                           id="strIdRadio2" title="12">
+                    <label class="form-check-label" for="strIdRadio2">
+                        Từ ngày có đơn hàng gần nhất (đến 12 tháng trước)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="classInputRadioTime form-check-input" type="radio" name="strNameGroupRadio"
+                           id="strIdRadio3" title="Today" disabled>
+                    <label class="form-check-label" for="strIdRadio3">
+                        Tự chọn
+                    </label>
+                </div>
+            </div>
+
+
+
+            @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+            .CVPartialView.PartialView._PVManyFuncHtml.PATH
+            , new string[] {"htmlDiv2Datepicker",""})
+
+
+            <div class="d-flex justify-content-around my-1">
+
+                <a class="btn btn-primary btn-sm" href="#" id="idAStartStatistic"
+                   strUrlPVToShow="@ViewBag.vbstrUrlForShow_PVManyChart"
+                   strInput="@ViewBag.vbstrUrlForAStartStatistic">Xác nhận</a>
+
+            </div>
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+</div>

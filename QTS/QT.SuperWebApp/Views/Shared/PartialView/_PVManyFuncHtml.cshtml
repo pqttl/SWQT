@@ -1,0 +1,74 @@
+﻿@model Object[]
+@{
+    var strName = QT.SuperWebApp.ConstantValueProject.CVPartialView.PartialView._PVManyFuncHtml.STR;
+    if (strName == "")
+    {
+    }
+
+    int intIndexIncrease = -1;
+    string strTemp = "";
+
+    strTemp = "";
+    intIndexIncrease++;
+    if (Model.Length > intIndexIncrease)
+    {
+        strTemp = Model[intIndexIncrease].ToString()!;
+    }
+    string strFuncName = strTemp;
+
+}
+
+@{
+
+    Func<string, Microsoft.AspNetCore.Html.IHtmlContent> htmlH6HeaderGroupbox =
+    @<h6 class="bg-white px-1 divGroupboxMarginLeft">
+        @item
+    </h6>;
+
+    Func<string, Microsoft.AspNetCore.Html.IHtmlContent> htmlDivHeaderGroupbox =
+    @<div class="position-absolute top-0 start-0  translate-middle-y d-flex justify-content-start">
+        @htmlH6HeaderGroupbox(item)
+    </div>;
+
+}
+
+@if (strFuncName == nameof(htmlDivHeaderGroupbox))
+{
+    @htmlDivHeaderGroupbox(Model[1].ToString()!)
+
+    return;
+}
+
+
+
+@{
+
+    Func<string[], Microsoft.AspNetCore.Html.IHtmlContent> htmlDivDatepicker =
+    @<div class="card my-3 mx-1 px-0 position-relative  ">
+
+        @htmlDivHeaderGroupbox(item[0])
+
+        <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+
+            <input id="@item[1]" type="text" class="classInputDatepicker input-sm form-control mt-1 border-0" name="start">
+
+        </div>
+
+    </div>;
+
+    Func<string, Microsoft.AspNetCore.Html.IHtmlContent> htmlDiv2Datepicker =
+    @<div class="classDiv2Datepicker d-flex justify-content-around my-1">
+
+        @htmlDivDatepicker(new string[] {"Từ 00h00 ngày","idInput"+item+"StartDate"} )
+        @htmlDivDatepicker(new string[] {"Đến 23h59 ngày","idInput"+item+"EndDate"} )
+
+    </div>;
+
+}
+
+@if (strFuncName == nameof(htmlDiv2Datepicker))
+{
+    @htmlDiv2Datepicker(Model[1].ToString()!)
+
+    return;
+}

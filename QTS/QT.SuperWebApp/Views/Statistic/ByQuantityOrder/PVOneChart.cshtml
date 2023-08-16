@@ -1,0 +1,70 @@
+﻿@{
+    var strName = nameof(QT.SuperWebApp.Controllers.StatisticController.PVOneChart);
+    if (strName == "")
+    {
+    }
+
+    string strNameChart = ViewBag.vbstrNameChart;
+}
+
+<div class="classDivOneChart collapse show">
+
+    @{
+        if (strNameChart=="Line")
+        {
+            <div class="mt-3 d-flex justify-content-start px-2">
+                <pre class="my-auto" style="white-space: pre-wrap;">A1:Cả ngày   B2:Từ 12h đến 24h00   C3:Từ 00h đến 11h59</pre>
+            </div>
+
+            <div class="card-body p-0 classMl0MrTru5">
+                <div style="min-height: 300px;">
+                    <canvas id="idCanvasLineChart"></canvas>
+                </div>
+            </div>
+        }
+    }
+    
+    @{
+        if (strNameChart=="Bar")
+        {
+            <div class="mt-3 d-flex justify-content-start px-2">
+                <pre class="my-auto" style="white-space: pre-wrap;">A1:Cả ngày   B2:Từ 12h đến 24h00   C3:Từ 00h đến 11h59</pre>
+            </div>
+
+            <div class="card-body p-0 classMl0Mr0">
+                <div style="min-height: 300px;">
+                    <canvas id="idCanvasBarChart"></canvas>
+                </div>
+            </div>
+        }
+    }
+    
+    @{
+        if (strNameChart == "MultiPie")
+        {
+            <div class="d-flex justify-content-center flex-wrap" id="idDivNoteColor">
+            </div>
+
+            <div class="card-body p-0 classMlTru5MrTru5">
+                <div class="d-flex justify-content-center" style="max-height: 400px;">
+                    <canvas id="idCanvasMultiPieChart"></canvas>
+                </div>
+            </div>
+        }
+    }
+    
+    @{
+        if (strNameChart == "PolarArea")
+        {
+            <div class="d-flex justify-content-center flex-wrap" id="idDiv2NoteColor">
+            </div>
+
+            <div class="card-body p-0 classMlTru5MrTru5">
+                <div class="d-flex justify-content-center" style="max-height: 400px;">
+                    <canvas id="idCanvasPolarAreaChart"></canvas>
+                </div>
+            </div>
+        }
+    }
+
+</div>

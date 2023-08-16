@@ -125,6 +125,18 @@
                                         string strAction = nameof(QT.SuperWebApp.Controllers.StatisticController.ByQuantity);
 
                                         <a class="nav-link" asp-controller="@strController"
+                                   asp-action="@strAction">Theo số đơn</a>
+
+                                    }
+                                }
+                                
+                                @{
+                                    {
+                                        string strTemp = nameof(QT.SuperWebApp.Controllers.StatisticController);
+                                        string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
+                                        string strAction = nameof(QT.SuperWebApp.Controllers.StatisticController.ByQuantityOrder);
+
+                                        <a class="nav-link" asp-controller="@strController"
                                    asp-action="@strAction">Theo số đơn hàng</a>
 
                                     }
@@ -169,6 +181,14 @@
         <div id="layoutSidenav_content">
             <main>
                 @RenderBody()
+
+                <div class="card my-1 border-0">
+
+                    @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject.CVPartialView.PartialView._LoadingPopup.PATH
+                    , new string[] {""})
+
+                </div>
+
             </main>
             <footer class="py-4 bg-light mt-auto collapse">
                 <div class="container-fluid px-4">

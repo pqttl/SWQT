@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Thống kê theo số đơn hàng";
+    ViewData["Title"] = "Thống kê theo số đơn";
     Layout = "~/Views/Shared/_LayoutBootstrapv5.cshtml";
     
     Func<int, Microsoft.AspNetCore.Html.IHtmlContent> htmlTrHeaderFooter =
@@ -135,7 +135,7 @@
                 <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
 
                 @{
-                    string strBreadcrumbCurrent = $"Thống kê theo số đơn hàng";
+                    string strBreadcrumbCurrent = $"Thống kê theo số đơn";
                 }
                 <li class="breadcrumb-item active">@strBreadcrumbCurrent</li>
 
@@ -392,13 +392,6 @@
 
 
 
-
-    <div class="card my-1 border-0">
-
-        @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject.CVPartialView.PartialView._LoadingPopup.PATH
-        , new string[] {""})
-
-    </div>
 
 
 

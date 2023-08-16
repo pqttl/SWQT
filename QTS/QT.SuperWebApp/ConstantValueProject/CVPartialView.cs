@@ -39,6 +39,12 @@
                 public const string STR = "_PVListIconSvg";
                 public const string PATH = PartialView.PATH + "/" + STR;
             }
+            
+            public class _PVManyFuncHtml
+            {
+                public const string STR = "_PVManyFuncHtml";
+                public const string PATH = PartialView.PATH + "/" + STR;
+            }
 
             public class _CardSortMaxToMin
             {

@@ -93,7 +93,7 @@ namespace QT.SuperWebApp.Controllers
                 
                 string strTemp = nameof(StatisticController);
                 string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
-                return RedirectToAction(nameof(StatisticController.ByQuantity), strController);
+                return RedirectToAction(nameof(StatisticController.ByQuantityOrder), strController);
 
                 //string strId = "1";
                 //string strTemp = nameof(AhkController);
