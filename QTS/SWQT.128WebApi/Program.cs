@@ -29,6 +29,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Declare DI
 builder.Services.AddTransient<ILoginService, SLoginService>();
 builder.Services.AddTransient<IStatisticService, SStatisticService>();
+builder.Services.AddTransient<IPostService, SPostService>();
 //builder.Services.AddTransient<IOrderService, OrderService>();
 #endregion
 

@@ -1,6 +1,7 @@
 ﻿using SWQT._768ConstantValue.ListTableDatabase;
 using SWQT._768ConstantValue;
 using System.Data;
+using SWQT._512ViewModels.Common;
 
 namespace QT.SuperWebApp
 {
@@ -10,6 +11,23 @@ namespace QT.SuperWebApp
         internal void ChangeColumnNameInDataTable(ref DataTable dtInput)
         {
             foreach (DataColumn dc in dtInput.Columns)
+            {
+                string strColumnName = dc.ColumnName;
+                if (strColumnName.Length > 0)
+                {
+                    strColumnName = strColumnName[0].ToString().ToUpper() + strColumnName.Substring(1);
+                }
+                if (strColumnName.ToLower() == "stt")
+                {
+                    strColumnName = "STT";
+                }
+                dc.ColumnName = strColumnName;
+            }
+        }
+
+        internal void ChangeColumnNameInDataTable(ref ApiResult<PagedResult<DataTable>> mApi)
+        {
+            foreach (DataColumn dc in mApi.TResultObj.TOneItem.Columns)
             {
                 string strColumnName = dc.ColumnName;
                 if (strColumnName.Length > 0)

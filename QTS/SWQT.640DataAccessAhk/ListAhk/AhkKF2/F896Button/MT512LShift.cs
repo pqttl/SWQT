@@ -25,7 +25,7 @@ namespace SWQT._640DataAccessAhk.ListAhk.AhkKF2.F896Button
             {
                 IntId = ++intIndexIncrease
                 ,
-                StrTitle = "Mine và huskCannon 6V"
+                StrTitle = "Mine 6V huskCannon 5V"
                 ,
                 StrCode = $@"
 LShift::

@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SWQT._768ConstantValue
 {
@@ -495,6 +496,32 @@ namespace SWQT._768ConstantValue
                 lstOutput.Add(strId + "_" + item);
             }
             return lstOutput;
+        }
+
+        public static string GetPlainTextFromHtml(string htmlString)
+        {
+            //string htmlTagPattern = "<.*?>";
+            //var regexCss = new Regex("(\\<script(.+?)\\)|(\\<style(.+?)\\)",RegexOptions.Singleline|RegexOptions.IgnoreCase);
+            //htmlString=regexCss.Replace(htmlString,string.Empty);
+            //htmlString=Regex.Replace(htmlString,htmlTagPattern,string.Empty);
+            //htmlString=Regex.Replace(htmlString,@"^\s+$[\r\n]*","",RegexOptions.Multiline);
+            //htmlString=htmlString.Replace(" ",string.Empty);
+
+            //return htmlString;
+
+            //Match any Html tag (opening or closing tags) 
+            // followed by any successive whitespaces
+            //consider the Html text as a single line
+
+            Regex regex = new Regex("(<.*?>\\s*)+", RegexOptions.Singleline);
+
+            // replace all html tags (and consequtive whitespaces) by spaces
+            // trim the first and last space
+
+            string resultText = regex.Replace(htmlString, " ").Trim();
+
+            return resultText;
+
         }
 
     }

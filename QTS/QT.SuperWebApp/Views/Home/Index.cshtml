@@ -1,13 +1,42 @@
-﻿@{
+﻿@model SWQT._512ViewModels.Common.PagedResult<System.Data.DataTable>
+
+@{
     ViewData["Title"] = "Trang chủ";
-    Layout = "~/Views/Shared/_LayoutBootstrapv5.cshtml";
-
-}
-@*@{
-    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutNormal.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>*@
+<div class="container-fluid">
+
+    @if (Model==null)
+    {
+        <div class="row px-1">
+            <p class="mb-0">
+                Hiện tại chưa có bài viết nào hoặc lỗi tải trang!
+            </p>
+        </div>
+    } else
+    {
+        var listStringClassBackground = (List<string>)ViewBag.vbLstString;
+        int intIndexIncrease = -1;
+
+        for (int i = Model!.TOneItem.Rows.Count - 1; i >= 0; i--)
+        {
+            System.Data.DataRow item = Model!.TOneItem.Rows[i];
+            string strId = "" + item["Id"].ToString();
+            string strActionName = nameof(QT.SuperWebApp.Controllers.HomeController.Detail);
+            string strLink = Url.Action(strActionName, new { intId = strId })!;
+            <div class="row">
+                <div class="card my-2 @listStringClassBackground[++intIndexIncrease]">
+                    <a href="@strLink" class="link-primary text-decoration-none alignleft">
+                        <h5 class="my-1">@item["Title"].ToString()</h5>
+                    </a>
+                    <p class="my-1">
+                        @item["Description"].ToString()
+                    </p>
+                </div>
+            </div>
+        }
+
+    }
+
+</div>

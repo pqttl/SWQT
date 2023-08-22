@@ -1,0 +1,108 @@
+﻿@model SWQT._512ViewModels.Common.PagedResult<System.Data.DataTable>
+
+@{
+    ViewData["Title"] = "Danh sách bài viết";
+    Layout = "~/Views/Shared/_LayoutBootstrapv5.cshtml";
+}
+
+@{
+    Func<int, Microsoft.AspNetCore.Html.IHtmlContent> htmlTrHeaderFooter =
+        @<tr class="text-center align-middle">
+            <th>STT</th>
+            <th>Tiêu đề</th>
+            <th>Tóm tắt</th>
+        </tr>;
+}
+
+<div class="container-fluid">
+
+    <div class="row px-1 d-flex justify-content-center">
+
+        <div class="card my-1 px-0 ">
+
+            <ol class="breadcrumb my-1 mx-2">
+                <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+
+                @{
+                    string strBreadcrumbCurrent = $"Danh sách bài viết";
+                    if (Model != null)
+                    {
+                        strBreadcrumbCurrent = $"Danh sách {@Model.IntTotalRecords} bài viết - {@Model.IntSumPage} trang ({@ViewBag.intPageSize} dữ liệu/ 1 trang)";
+                    }
+                }
+                <li class="breadcrumb-item active">@strBreadcrumbCurrent</li>
+
+            </ol>
+
+        </div>
+
+    </div>
+
+    <div class="row px-1">
+
+        <div class="card my-1 px-0">
+
+            <div class="card-header">
+
+                @{
+                    string strTemp = nameof(QT.SuperWebApp.Controllers.PostController);
+                    string strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
+                    string strAction = nameof(QT.SuperWebApp.Controllers.PostController.Add);
+
+                    <a class="btn btn-primary btn-sm" asp-controller="@strController"
+                       asp-action="@strAction">Thêm mới</a>
+
+                }
+
+            </div>
+
+            <div class="card-body p-1">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm table-striped mb-0" id="infoTable">
+
+                        <thead>
+                            @htmlTrHeaderFooter( 0)
+                        </thead>
+
+                        @if (Model != null)
+                        {
+
+                            <tbody>
+
+                                @{
+                                    int intIndexIncrease = 0;
+                                    foreach (System.Data.DataRow item in Model!.TOneItem.Rows)
+                                    {
+                                        <tr class="text-center align-middle">
+                                            <td>
+                                                @(++intIndexIncrease)
+                                            </td>
+                                            <td>
+                                                @item["Title"].ToString()
+                                            </td>
+                                            <td>
+                                                @item["Description"].ToString()
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+
+                            </tbody>
+
+                        }
+
+                        <tfoot>
+                            @htmlTrHeaderFooter(0)
+                        </tfoot>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

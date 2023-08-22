@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SWQT._512ViewModels.Common;
 using System.Data;
-using System.Globalization;
 
 namespace SWQT._128WebApi
 {
@@ -23,25 +21,25 @@ namespace SWQT._128WebApi
 
         #endregion
 
-        //public void CloneAndCopyRowDataTableByPage(ref DataTable dtByPage, PagingRequestBase mRequest
-        //    , DataTable dtInput)
-        //{
-        //    dtByPage = dtInput.Clone();
+        public void CloneAndCopyRowDataTableByPage(ref DataTable dtByPage, PagingRequestBase mRequest
+            , DataTable dtInput)
+        {
+            dtByPage = dtInput.Clone();
 
-        //    int intIdPage = mRequest.IntPageIndex;
-        //    int CONST_INT_PAGE_SIZE = mRequest.IntPageSize;
+            int intIdPage = mRequest.IntPageIndex;
+            int CONST_INT_PAGE_SIZE = mRequest.IntPageSize;
 
-        //    int intStartIndex = intIdPage * CONST_INT_PAGE_SIZE;
-        //    int intMaxEndIndexByPage = (intIdPage + 1) * CONST_INT_PAGE_SIZE;
-        //    int intEndIndex = dtInput.Rows.Count < intMaxEndIndexByPage ?
-        //      dtInput.Rows.Count : intMaxEndIndexByPage;
+            int intStartIndex = intIdPage * CONST_INT_PAGE_SIZE;
+            int intMaxEndIndexByPage = (intIdPage + 1) * CONST_INT_PAGE_SIZE;
+            int intEndIndex = dtInput.Rows.Count < intMaxEndIndexByPage ?
+              dtInput.Rows.Count : intMaxEndIndexByPage;
 
-        //    for (int i = intStartIndex; i < intEndIndex; i++)
-        //    {
-        //        DataRow dr = dtInput.Rows[i];
-        //        dtByPage.ImportRow(dr);
-        //    }
-        //}
+            for (int i = intStartIndex; i < intEndIndex; i++)
+            {
+                DataRow dr = dtInput.Rows[i];
+                dtByPage.ImportRow(dr);
+            }
+        }
 
         //internal void GetDataTableOrderPaging(ref DataTable dtOutput, DataTable dtByPage
         //    , DataTable dtDetail)

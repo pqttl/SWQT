@@ -39,6 +39,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddTransient<ILoginApiClient, LoginApiClient>();
 //builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 builder.Services.AddTransient<IStatisticApiClient, ACStatisticApiClient>();
+builder.Services.AddTransient<IPostApiClient, ACPostApiClient>();
 //builder.Services.AddTransient<IViewRenderService, ViewRenderService>();
 #endregion
 

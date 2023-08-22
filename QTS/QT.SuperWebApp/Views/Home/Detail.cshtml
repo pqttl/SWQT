@@ -1,0 +1,40 @@
+﻿@model String[]
+
+@{
+    string strTitle = "Chi tiết";
+    if (Model!=null)
+    {
+        strTitle = Model[0];
+    }
+}
+
+@{
+    ViewData["Title"] = strTitle;
+    Layout = "~/Views/Shared/_LayoutNormal.cshtml";
+}
+
+@if (Model==null)
+{
+    <div class="container-fluid">
+        <div class="row px-1">
+            <p class="mb-0">
+                Hiện tại không tồn tại bài viết này hoặc lỗi tải trang, bạn vui lòng quay lại trang chủ để truy cập lại!
+            </p>
+
+            @if (ViewBag.vbstrError!=null)
+            {
+                <p class="mb-0">
+                    @ViewBag.vbstrError
+                </p>
+            }
+
+        </div>
+    </div>
+} else
+{
+    <h1 class="mt-4">@strTitle</h1>
+    <hr />
+
+    @Html.Raw(Model[1])
+}
+
