@@ -7,6 +7,11 @@
         {
             public const string STR = "IconEdit";
         }
+        
+        public class IconDelete
+        {
+            public const string STR = "IconDelete";
+        }
 
     }
 }

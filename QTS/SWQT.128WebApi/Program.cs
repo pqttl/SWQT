@@ -34,7 +34,12 @@ builder.Services.AddTransient<IPostService, SPostService>();
 #endregion
 
 
+#region Thêm Automapper
 
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+#endregion
 
 builder.Services.AddControllers();
 

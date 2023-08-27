@@ -1,0 +1,98 @@
+﻿@model SWQT._512ViewModels.Common.PagedResultBase
+@{
+    var strNameComponent = QT.SuperWebApp.ConstantValueProject.CVPartialView.PartialView._PVPager.STR;
+    if (strNameComponent == "")
+    {
+    }
+
+    var urlTemplate = Url.Action() + $"?{nameof(Model.IntPageIndex)}" + "={0}";
+    var request = ViewContext.HttpContext.Request;
+    foreach (var key in request.Query.Keys)
+    {
+        if (key == nameof(Model.IntPageIndex))
+        {
+            continue;
+        }
+        if (request.Query[key].Count > 1)
+        {
+            foreach (var item in (string[])request.Query[key])
+            {
+                urlTemplate += "&" + key + "=" + item;
+            }
+        }
+        else
+        {
+            urlTemplate += "&" + key + "=" + request.Query[key];
+        }
+    }
+
+    var lstStringButton = new List<string>();
+    lstStringButton.Add("|<");
+    lstStringButton.Add("<");
+    lstStringButton.Add(">");
+    lstStringButton.Add(">|");
+
+    var intSoTrangHienThiTruoc = 2;
+
+    var intMinIndex = 0;
+    var intMaxIndex = Model.IntSumPage - 1;
+    var intStartIndex = Math.Max(Model.IntPageIndex - intSoTrangHienThiTruoc, intMinIndex);
+    var intFinishIndex = Math.Min(Model.IntPageIndex + intSoTrangHienThiTruoc, intMaxIndex);
+}
+
+@if (Model.IntSumPage > 1)
+{
+
+    <div class="d-flex flex-row-reverse">
+
+        <ul class="pagination pagination-sm mb-0">
+            @if (Model.IntPageIndex != intStartIndex)
+            {
+                <li class="page-item">
+                    <a class="page-link" title="1" href="@urlTemplate.Replace("{0}", intMinIndex.ToString())">@lstStringButton[0]</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                       href="@urlTemplate.Replace("{0}", (Model.IntPageIndex-1).ToString())">@lstStringButton[1]</a>
+                </li>
+            }
+
+
+            @for (var intIndexCurrent = intStartIndex; intIndexCurrent <= intFinishIndex; intIndexCurrent++)
+            {
+                int intLabelShow = intIndexCurrent + 1;
+                if (intIndexCurrent == Model.IntPageIndex)
+                {
+                    <li class="page-item active">
+                        <a class="page-link" href="#">@intLabelShow <span class="sr-only">(current)</span></a>
+                    </li>
+                }
+                else
+                {
+                    string strTitlePage = "Trang " + intLabelShow.ToString();
+                    <li class="page-item">
+                        <a class="page-link" title="@strTitlePage"
+                           href="@urlTemplate.Replace("{0}", intIndexCurrent.ToString())">@intLabelShow</a>
+                    </li>
+                }
+            }
+
+
+
+            @if (Model.IntPageIndex != intFinishIndex)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       href="@urlTemplate.Replace("{0}", (Model.IntPageIndex+1).ToString())">@lstStringButton[2]</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" title="@Model.IntSumPage.ToString()"
+                       href="@urlTemplate.Replace("{0}", intMaxIndex.ToString())">@lstStringButton[3]</a>
+                </li>
+            }
+        </ul>
+
+    </div>
+
+}
+

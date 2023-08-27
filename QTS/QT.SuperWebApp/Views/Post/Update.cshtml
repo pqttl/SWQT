@@ -1,15 +1,14 @@
-﻿@using SWQT._512ViewModels.Admin.Post
-@model VMAddPostRequest
+﻿@model SWQT._576Entity.Entities.TblListPost
 
 @{
-    ViewData["Title"] = "Thêm mới";
+    ViewData["Title"] = "Cập nhật";
     Layout = "~/Views/Shared/_LayoutBootstrapv5.cshtml";
 }
 
 @{
-                string strTemp = "";
-                    string strController = "";
-                    string strAction = "";
+    string strTemp = "";
+    string strController = "";
+    string strAction = "";
 }
 
 @section ScriptsCSS{
@@ -29,9 +28,9 @@
 }
 
 @section ScriptsJavaScript{
-    
-      <script src="/plugins/ckfinder/ckfinder.js"></script>
-      <script src="/plugins/ckeditor/ckeditor.js"></script>
+
+    <script src="/plugins/ckfinder/ckfinder.js"></script>
+    <script src="/plugins/ckeditor/ckeditor.js"></script>
 
     <script type='text/javascript'>
 
@@ -67,7 +66,7 @@
                 }
 
                 @{
-                    string strBreadcrumbCurrent = $"Thêm mới";
+                    string strBreadcrumbCurrent = $"Cập nhật";
                 }
                 <li class="breadcrumb-item active">@strBreadcrumbCurrent</li>
 
@@ -76,13 +75,13 @@
         </div>
 
     </div>
-    
+
     <div class="row px-1">
 
         @{
             strTemp = nameof(QT.SuperWebApp.Controllers.PostController);
             strController = strTemp.Substring(0, strTemp.LastIndexOf("Controller"));
-            strAction = nameof(QT.SuperWebApp.Controllers.PostController.Add);
+            strAction = nameof(QT.SuperWebApp.Controllers.PostController.Update);
         }
 
         <form class="px-0" asp-controller="@strController"
@@ -92,17 +91,57 @@
 
                 <div class="card-body p-1">
 
-                    <div class="card my-3 px-0 position-relative ">
+                    <div class="card my-3 px-0 position-relative disabledElement">
 
                         @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
                         .CVPartialView.PartialView._PVManyFuncHtml.PATH
-                        , new string[] {"htmlDivHeaderGroupbox","Tiêu đề"})
+                        , new string[] {"htmlDivHeaderGroupbox","Mã dữ liệu"})
 
                         <div class="card-body  py-0 px-1 divGroupboxMarginTop">
 
                             <div class="my-1 mx-1 mb-2">
-                                <input class="form-control" asp-for="@Model.StrTitle" type="text" 
-                                placeholder="Nhập tiêu đề..." aria-label="default input example">
+
+                                <input class="form-control" asp-for="@Model.Id" type="text"
+                                       placeholder="Nhập mã dữ liệu..." aria-label="default input example">
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="card my-3 px-0 position-relative disabledElement">
+
+                        @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+                        .CVPartialView.PartialView._PVManyFuncHtml.PATH
+                        , new string[] {"htmlDivHeaderGroupbox","Tiêu đề hiện tại"})
+
+                        <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+
+                            <div class="my-1 mx-1 mb-2">
+                                <input class="form-control" value="@Model.Title" type="text"
+                                       placeholder="Nhập tiêu đề..." aria-label="default input example">
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    
+                    <div class="card my-3 px-0 position-relative ">
+
+                        @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
+                        .CVPartialView.PartialView._PVManyFuncHtml.PATH
+                        , new string[] {"htmlDivHeaderGroupbox","Tiêu đề mới"})
+
+                        <div class="card-body  py-0 px-1 divGroupboxMarginTop">
+
+                            <div class="my-1 mx-1 mb-2">
+                                <input class="form-control" asp-for="@Model.Title" type="text"
+                                       placeholder="Nhập tiêu đề..." aria-label="default input example">
 
 
                             </div>
@@ -120,7 +159,7 @@
 
                         <div class="card-body pb-1 py-0 px-1 divGroupboxMarginTop">
 
-                            <textarea class="form-control my-1" asp-for="@Model.StrDetail"
+                            <textarea class="form-control my-1" asp-for="@Model.Detail"
                                       id="idTextareaDetail"></textarea>
 
 
@@ -133,13 +172,13 @@
                 @{
                     string strError = "";
                     strError = ViewBag.vbstrError;
-                    if (strError!=null&&strError!="")
+                    if (strError != null && strError != "")
                     {
-                <div class="card-footer d-flex justify-content-center text-danger">
-                
-                    <p class="fs-6 mb-0">@strError</p>
+                        <div class="card-footer d-flex justify-content-center text-danger">
 
-                </div>
+                            <p class="fs-6 mb-0">@strError</p>
+
+                        </div>
                     }
                 }
 

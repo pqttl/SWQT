@@ -57,6 +57,12 @@
                 public const string STR = "_LoadingPopup";
                 public const string PATH = PartialView.PATH + "/" + STR;
             }
+            
+            public class _PVPager
+            {
+                public const string STR = "_PVPager";
+                public const string PATH = PartialView.PATH + "/" + STR;
+            }
 
         }
 

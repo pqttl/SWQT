@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SWQT.512ViewModels\SWQT.512ViewModels.csproj" />
+    <ProjectReference Include="..\SWQT.576Entity\SWQT.576Entity.csproj" />
     <ProjectReference Include="..\SWQT.640DataAccessAhk\SWQT.640DataAccessAhk.csproj" />
     <ProjectReference Include="..\SWQT.768ConstantValue\SWQT.768ConstantValue.csproj" />
   </ItemGroup>

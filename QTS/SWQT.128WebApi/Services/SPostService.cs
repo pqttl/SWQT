@@ -1,6 +1,9 @@
-﻿using SWQT._320DataAccessSQLite.DALSQLite;
+﻿using AutoMapper;
+using SWQT._224DataAccessSQLiteEFCore.DALSQLite;
+using SWQT._320DataAccessSQLite.DALSQLite;
 using SWQT._512ViewModels.Admin.Post;
 using SWQT._512ViewModels.Common;
+using SWQT._576Entity.Entities;
 using SWQT._768ConstantValue;
 using System.Data;
 
@@ -10,12 +13,15 @@ namespace SWQT._128WebApi.Services
     {
 
         private readonly DALLitePost DAL_Post = new DALLitePost();
+        private readonly DALLiteEFPost DALEF_Post = new DALLiteEFPost();
         private readonly BLLProject _bllPlugin = new BLLProject();
         private readonly IConfiguration _iConfig;
+        private readonly IMapper _iMapper;
 
-        public SPostService(IConfiguration config)
+        public SPostService(IConfiguration config, IMapper iMapper)
         {
             _iConfig = config;
+            _iMapper = iMapper;
         }
 
         public ApiResult<bool> AddPost(VMAddPostRequest mRequest)
@@ -44,6 +50,84 @@ namespace SWQT._128WebApi.Services
             }
 
             return new ApiSuccessResult<bool>();
+        }
+
+        public ApiResult<bool> BlnUpdateList(List<TblListPost> lstInput)
+        {
+            try
+            {
+                var lstData = new List<TblListPost>();
+                foreach (var item in lstInput)
+                {
+                    if (item.Title == null || item.Title.Trim().Length < 12)
+                    {
+                        return new ApiSuccessResult<bool>().MHaveMessage("Tiêu đề phải từ 12 kí tự trở lên!"
+                            , "(mRequest.StrTitle == null || mRequest.StrTitle.Trim().Length < 12)");
+                    }
+
+                    string strTitle = item.Title.Trim();
+                    string strTextTrimNoUnicode = BLLTools.RemoveUnicode(strTitle);
+                    string strMetaTitle = strTextTrimNoUnicode.Replace("  ", " ").Replace(" ", "-");
+
+                    string strDescription = "Truy cập trang để xem chi tiết nội dung này ...";
+                    try
+                    {
+                        string strPlainTextTrim = BLLTools.GetPlainTextFromHtml(item.Detail!);
+                        strPlainTextTrim = System.Net.WebUtility.HtmlDecode(strPlainTextTrim);
+                        strDescription = strPlainTextTrim.Replace("  ", " ");
+                    }
+                    catch (Exception et)
+                    {
+                        string str = et.Message;
+                    }
+
+                    strDescription = (strDescription.Length > 240) ? (strDescription.Substring(0, 240) + "...") : strDescription;
+
+                    //var mData = new TblListPost();
+                    //mData.Id = item.Id;
+                    //mData.Title = strTitle;
+                    //mData.Detail = item.Detail;
+                    //mData.MetaTitle = strMetaTitle;
+                    //mData.Description = strDescription;
+                    //mData.ModifiedBy = "adminqt";
+                    //mData.ModifiedDate = DateTime.Now.ToString(QTFormat.STR_DATETIME_SQLITE.STR);
+
+                    var mData = _iMapper.Map<TblListPost>(item);
+                    mData.Title = strTitle;
+                    mData.MetaTitle = strMetaTitle;
+                    mData.Description = strDescription;
+                    mData.ModifiedBy = "adminqt";
+                    mData.ModifiedDate = DateTime.Now.ToString(QTFormat.STR_DATETIME_SQLITE.STR);
+
+                    lstData.Add(mData);
+                }
+
+                bool objResult = DALEF_Post.BlnUpdateListSuccess(lstData);
+                return new ApiSuccessResult<bool>(objResult);
+            }
+            catch (Exception et)
+            {
+                var apiError = new ApiErrorResult<bool>();
+                string str = et.Message;
+                return apiError.MHaveMessage(str
+                    , et.StackTrace!);
+            }
+        }
+
+        public ApiResult<bool> BlnDeleteByListId(List<int> lstInput)
+        {
+            try
+            {
+                bool objResult = DALEF_Post.BlnSuccessDeleteByListId(lstInput);
+                return new ApiSuccessResult<bool>(objResult);
+            }
+            catch (Exception et)
+            {
+                var apiError = new ApiErrorResult<bool>();
+                string str = et.Message;
+                return apiError.MHaveMessage(str
+                    , et.StackTrace!);
+            }
         }
 
         public ApiResult<PagedResult<DataTable>> GetPostPaging(VMGetPostPaging mRequest)
@@ -120,5 +204,44 @@ namespace SWQT._128WebApi.Services
             };
             return new ApiSuccessResult<PagedResult<DataTable>>(mPagedResult);
         }
+
+        public ApiResult<PagedResult<List<TblListPost>>> GetPostPagingNewest(VMGetPostPaging mRequest)
+        {
+            try
+            {
+                var mPagedResult = new PagedResult<List<TblListPost>>()
+                {
+                    IntTotalRecords = DALEF_Post.IntTotalRow(),
+                    IntPageIndex = mRequest.IntPageIndex,
+                    IntPageSize = mRequest.IntPageSize,
+                    TOneItem = DALEF_Post.LstByPageAndSize(mRequest)
+                };
+                return new ApiSuccessResult<PagedResult<List<TblListPost>>>(mPagedResult);
+            }
+            catch (Exception et)
+            {
+                var apiError = new ApiErrorResult<PagedResult<List<TblListPost>>>();
+                string str = et.Message;
+                return apiError.MHaveMessage(str
+                    , et.StackTrace!);
+            }
+        }
+
+        public ApiResult<List<TblListPost>> GetListDetailByListId(List<int> lstInput)
+        {
+            try
+            {
+                List<TblListPost> lst = DALEF_Post.LstByListId(lstInput);
+                return new ApiSuccessResult<List<TblListPost>>(lst);
+            }
+            catch (Exception et)
+            {
+                var apiError = new ApiErrorResult<List<TblListPost>>();
+                string str = et.Message;
+                return apiError.MHaveMessage(str
+                    , et.StackTrace!);
+            }
+        }
+
     }
 }

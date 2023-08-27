@@ -31,6 +31,20 @@ function setDisableAllForIdAndChild(jqoInput, blnDisable) {
 
 }
 
+function voidShowLoadingWithPercentOnly(strPercent) {
+
+    document.getElementById("idStrPercent").innerHTML = strPercent;
+
+    $("#idDivSpinnerPercent").collapse('show');
+    $("#idDivMessage").collapse('hide');
+
+    $("#idDivBtnLoading").collapse('hide');
+
+
+    $("#idDivStaticBackdropLivePopup").modal('show');
+
+}
+
 function voidShowLoadingWithTitlePercent(strTitle, strPercent) {
 
     if (strTitle == "") {
@@ -42,10 +56,8 @@ function voidShowLoadingWithTitlePercent(strTitle, strPercent) {
 
     $("#idDivSpinnerPercent").collapse('show');
     $("#idDivMessage").collapse('hide');
-    $("#idDivBtnLoading").collapse('hide');
 
-    //setCollapseForId($("#idButtonAccept"), true);
-    //setCollapseForId($("#idButtonClose"), true);
+    $("#idDivBtnLoading").collapse('hide');
 
 
     $("#idDivStaticBackdropLivePopup").modal('show');
@@ -57,7 +69,36 @@ function funcShowMessage(strMess) {
 
     $("#idDivSpinnerPercent").collapse('hide');
     $("#idDivMessage").collapse('show');
+
     $("#idDivBtnLoading").collapse('show');
+    $("#idButtonAccept").collapse('hide');
+
+    $("#idDivStaticBackdropLivePopup").modal('show');
+
+}
+
+function funcShowMessageNoButton(strMess) {
+    $("#idDivMessage").find("p").first().text(strMess);
+
+    $("#idDivSpinnerPercent").collapse('hide');
+    $("#idDivMessage").collapse('show');
+
+    $("#idDivBtnLoading").collapse('hide');
+    //$("#idButtonAccept").collapse('hide');
+
+    $("#idDivStaticBackdropLivePopup").modal('show');
+
+}
+
+function funcShowConfirm(strTitle, strMess) {
+    $("#idDivMessage").find("p").first().text(strMess);
+    document.getElementById("idStrTitle").innerHTML = strTitle;
+
+    $("#idDivSpinnerPercent").collapse('hide');
+    $("#idDivMessage").collapse('show');
+
+    $("#idDivBtnLoading").collapse('show');
+    $("#idButtonAccept").collapse('show');
 
     $("#idDivStaticBackdropLivePopup").modal('show');
 

@@ -26,6 +26,8 @@ namespace QT.SuperWebApp.Services
             StrBaseAddress = _configuration[STR_api.STR_BASE_ADDRESS.STR];
         }
 
+        #region GET METHOD
+
         protected async Task<TResponse> TGetAsync<TResponse>(string strRequestUri)
         {
             HttpClient client = _httpClientFactory.CreateClient();
@@ -34,6 +36,30 @@ namespace QT.SuperWebApp.Services
             var response = await client.GetAsync(strRequestUri);
             return await TResultDeserializeJson<TResponse>(response);
         }
+        
+        protected async Task<TResponse> TGetAsyncByJson<TResponse>(string strRequestUri, string strJsonInput)
+        {
+            var httpContent = new StringContent(strJsonInput, Encoding.UTF8, "application/json");
+            HttpClient client = _httpClientFactory.CreateClient();
+            UpdateClientByToken(ref client);
+
+            var response = await client.PostAsync(strRequestUri, httpContent);
+            return await TResultDeserializeJson<TResponse>(response);
+        }
+
+        public async Task<string> TStringPostAsync(string strRequestUri, string strJsonInput)
+        {
+            var httpContent = new StringContent(strJsonInput, Encoding.UTF8, "application/json");
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(StrBaseAddress);
+
+            var response = await client.PostAsync(strRequestUri, httpContent);
+            string strJsonDictionary = await response.Content.ReadAsStringAsync();
+            return strJsonDictionary;
+        }
+
+        #endregion
 
         private void UpdateClientByToken(ref HttpClient client)
         {
@@ -78,18 +104,6 @@ namespace QT.SuperWebApp.Services
 
 
 
-
-        public async Task<string> TStringPostAsync(string strRequestUri, string strJsonInput)
-        {
-            var httpContent = new StringContent(strJsonInput, Encoding.UTF8, "application/json");
-
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(StrBaseAddress);
-
-            var response = await client.PostAsync(strRequestUri, httpContent);
-            string strJsonDictionary = await response.Content.ReadAsStringAsync();
-            return strJsonDictionary;
-        }
 
         protected async Task<TResponse> TDeleteAsync<TResponse>(string strRequestUri)
         {

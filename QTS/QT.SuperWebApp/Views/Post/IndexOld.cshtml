@@ -1,7 +1,7 @@
-﻿@model SWQT._512ViewModels.Common.PagedResult<List<SWQT._576Entity.Entities.TblListPost>>
+﻿@model SWQT._512ViewModels.Common.PagedResult<System.Data.DataTable>
 
 @{
-    ViewData["Title"] = "Danh sách bài viết EF";
+    ViewData["Title"] = "Danh sách bài viết ADO.Net";
     Layout = "~/Views/Shared/_LayoutBootstrapv5.cshtml";
 }
 
@@ -11,25 +11,7 @@
             <th>STT</th>
             <th>Tiêu đề</th>
             <th>Tóm tắt</th>
-            <th>...</th>
         </tr>;
-
-    Func<string, Microsoft.AspNetCore.Html.IHtmlContent> htmlPager =
-        @<div class="@item">
-
-            @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject.CVPartialView
-            .PartialView._PVPager.PATH
-            , Model)
-
-        </div>;
-}
-
-@section ScriptsJavaScript{
-
-    <script src="/js/scriptsFunctionCommon.js"></script>
-
-    <script src="/js/Post/Index.js"></script>
-
 }
 
 <div class="container-fluid">
@@ -76,8 +58,6 @@
 
             <div class="card-body p-1">
 
-                @htmlPager("mb-1")
-
                 <div class="table-responsive">
                     <table class="table table-bordered table-sm table-striped mb-0" id="infoTable">
 
@@ -92,44 +72,17 @@
 
                                 @{
                                     int intIndexIncrease = 0;
-                                    foreach (var item in Model!.TOneItem)
+                                    foreach (System.Data.DataRow item in Model!.TOneItem.Rows)
                                     {
-
-                                        string strId = "" + item.Id;
-                                        string strActionName = nameof(QT.SuperWebApp.Controllers.PostController.Update);
-                                        string strLink = Url.Action(strActionName, new { intId = strId })!;
-                                        string strHtmlAddToLink = $"href='{strLink}' class='text-decoration-none my-1'";
-
                                         <tr class="text-center align-middle">
                                             <td>
                                                 @(++intIndexIncrease)
                                             </td>
                                             <td>
-                                                @item.Title
+                                                @item["Title"].ToString()
                                             </td>
                                             <td>
-                                                @item.Description
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column">
-                                                    <a @Html.Raw(strHtmlAddToLink) title="Sửa">
-
-                                                        @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
-                                            .CVPartialView.PartialView._PVListIconSvg.PATH
-                                            , new string[] {QT.SuperWebApp.ConstantValueProject
-                                            .CVIconName.IconEdit.STR})
-
-                                                    </a>
-                                                    <a href="#" strUrlDelete="@ViewBag.vb_strUrlDelete" 
-                                                    strId="@strId" class="classADelete text-decoration-none my-1" title="Xóa">
-
-                                                        @await Html.PartialAsync(QT.SuperWebApp.ConstantValueProject
-                                            .CVPartialView.PartialView._PVListIconSvg.PATH
-                                            , new string[] {QT.SuperWebApp.ConstantValueProject
-                                            .CVIconName.IconDelete.STR})
-
-                                                    </a>
-                                                </div>
+                                                @item["Description"].ToString()
                                             </td>
                                         </tr>
 
@@ -146,9 +99,6 @@
 
                     </table>
                 </div>
-
-                @htmlPager("mt-1")
-
             </div>
 
         </div>
