@@ -15,15 +15,15 @@ var builder = WebApplication.CreateBuilder(args);
 #region Enable CORS để front end react gọi được api, còn có 1 cách sửa ở front end bằng cách sửa chrome(cách này đã thử nhưng chưa được)
 //IConfigurationSection myArraySection = Configuration.GetSection("ArrayStringLinkFrontendReact");
 //var itemArray = myArraySection.AsEnumerable();
-//string[] arrayStringLinkFrontend = Configuration.GetSection("ArrayStringLinkFrontendReact").Get<string[]>();
+string[] arrayStringLinkFrontend = builder.Configuration.GetSection("ArrayStringLinkFrontendReact").Get<string[]>();
 ////Sửa arrayStringLinkFrontend ở DNQT.BackendApi\appsettings.json
 
-//builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-//{
-//    builder.WithOrigins(arrayStringLinkFrontend)
-//           .AllowAnyMethod()
-//           .AllowAnyHeader();
-//}));
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+{
+    builder.WithOrigins(arrayStringLinkFrontend)
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
 #endregion
 
 #region Khai báo DI
@@ -166,7 +166,7 @@ app.UseHttpsRedirection();
 
 
 #region Enable CORS để front end react gọi được api, còn có 1 cách sửa ở front end bằng cách sửa chrome(cách này đã thử nhưng chưa được)
-//app.UseCors("MyPolicy");
+app.UseCors("MyPolicy");
 #endregion
 
 
