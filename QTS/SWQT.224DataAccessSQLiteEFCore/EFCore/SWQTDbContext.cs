@@ -4,7 +4,7 @@ using SWQT._576Entity.Entities;
 
 namespace SWQT._224DataAccessSQLiteEFCore.EFCore
 {
-    internal class SWQTDbContext:DbContext
+    public class SWQTDbContext:DbContext
     {
 
         #region Danh sach Dbset

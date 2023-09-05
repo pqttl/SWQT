@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SWQT._128WebApi.Services;
+using SWQT._224DataAccessSQLiteEFCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +31,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<ILoginService, SLoginService>();
 builder.Services.AddTransient<IStatisticService, SStatisticService>();
 builder.Services.AddTransient<IPostService, SPostService>();
-//builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 #endregion
 
 
