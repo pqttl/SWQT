@@ -68,6 +68,8 @@ namespace SWQT._128WebApi.Services
 
             var mNewItem = new TblListPost();
             mNewItem.Id = longMaxId + 1;
+            mNewItem.Name = "";
+            mNewItem.Json = "";
             mNewItem.Title = strTitle;
             mNewItem.MetaTitle = strMetaTitle;
             mNewItem.Description = strDescription;
